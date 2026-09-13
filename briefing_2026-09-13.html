@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Paper Briefing 2026-09-13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#003657; --navy-deep:#002841; --cardinal:#d22d40;
+  --bg:#ffffff; --surface:#ffffff; --text:#1a1a1a; --muted:#5c5c5c;
+  --border:#e4e4e4; --band-text:#ffffff; --shadow:0 1px 2px rgba(0,0,0,.06);
+}
+/* Light by default, deliberately: the digest is read in the morning and on
+   a hosted page where the viewer's OS theme is not a useful signal. Dark is
+   still available, but only when explicitly selected. */
+:root[data-theme="dark"]{
+  --navy:#7fb0d4; --navy-deep:#0d1b26; --cardinal:#e8697a;
+  --bg:#11151a; --surface:#181d24; --text:#e9e6e2; --muted:#9aa4ae;
+  --border:#2a323b; --band-text:#eaf2f8; --shadow:none;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"EB Garamond",Garamond,"Adobe Garamond Pro","Palatino Linotype",
+              Palatino,Georgia,serif;
+  font-size:18px; line-height:1.55;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 20px 64px}
+header.masthead{
+  background:var(--navy-deep); color:var(--band-text);
+  padding:34px 20px 28px; margin-bottom:34px;
+  border-bottom:4px solid var(--cardinal);
+}
+.masthead-inner{max-width:820px; margin:0 auto}
+h1{
+  margin:0 0 6px; font-size:2.1rem; font-weight:600; letter-spacing:.01em;
+  color:var(--band-text);
+}
+.dateline{margin:0; font-size:1rem; color:var(--band-text); opacity:.85}
+.counts{margin:14px 0 0; font-size:.9rem; color:var(--band-text); opacity:.8}
+details.sources{margin-top:12px; font-size:.85rem; color:var(--band-text)}
+details.sources summary{cursor:pointer; opacity:.85}
+details.sources .list{
+  margin-top:8px; opacity:.8; line-height:1.7; word-break:break-word;
+}
+h2.thread{
+  font-size:1.28rem; font-weight:600; margin:38px 0 4px; color:var(--navy);
+  padding-bottom:7px; border-bottom:2px solid var(--navy);
+}
+.thread-count{font-size:.82rem; color:var(--muted); margin:0 0 16px}
+.card{
+  background:var(--surface); border:1px solid var(--border);
+  border-left:3px solid var(--cardinal); border-radius:3px;
+  padding:15px 18px; margin-bottom:14px; box-shadow:var(--shadow);
+}
+.card h3{margin:0 0 5px; font-size:1.08rem; font-weight:600; line-height:1.35}
+.card h3 a{color:var(--text); text-decoration:none;
+  border-bottom:1px solid transparent}
+.card h3 a:hover{color:var(--cardinal); border-bottom-color:var(--cardinal)}
+.meta{margin:0 0 9px; font-size:.86rem; color:var(--muted)}
+.badge{
+  display:inline-block; background:var(--cardinal); color:#fff;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:.7rem; font-weight:600; letter-spacing:.03em;
+  padding:2px 7px; border-radius:2px;
+  margin-right:8px; vertical-align:1px; white-space:nowrap;
+}
+.meta .series{color:var(--navy); font-style:italic}
+.kw{margin:0 0 8px; display:flex; flex-wrap:wrap; gap:5px}
+.kw span{
+  display:inline-block; border:1px solid var(--navy); color:var(--navy);
+  background:transparent; font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:.64rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+  padding:1px 6px; border-radius:9px; white-space:nowrap;
+}
+.card.flagged{border-left-width:5px}
+.alarm{
+  background:var(--cardinal); color:#fff; padding:12px 16px; border-radius:3px;
+  margin:14px 0 0; font-size:.92rem;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.alarm strong{font-weight:700}
+.note{margin:0; font-size:.95rem}
+.note::before{
+  content:"Why it matters "; color:var(--cardinal); font-weight:600;
+  font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.empty{
+  color:var(--muted); font-style:italic; margin:0 0 8px; padding:10px 0;
+  font-size:.95rem;
+}
+/* Browse section: everything fetched that did not earn a written note. */
+.browse{margin-top:46px; border-top:2px solid var(--navy); padding-top:8px}
+.browse > summary{
+  cursor:pointer; font-size:1.28rem; font-weight:600; color:var(--navy);
+  padding:8px 0; list-style:none;
+}
+.browse > summary::-webkit-details-marker{display:none}
+.browse > summary::before{content:"\25B8 "; font-size:.9em}
+.browse[open] > summary::before{content:"\25BE "}
+.browse .hint{font-size:.85rem; color:var(--muted); margin:2px 0 14px}
+.filters{
+  display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:16px;
+}
+.filters input{
+  font-family:inherit; font-size:.92rem; padding:6px 10px; flex:1 1 190px;
+  border:1px solid var(--border); border-radius:3px;
+  background:var(--surface); color:var(--text);
+}
+.chip{
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif; font-size:.7rem;
+  font-weight:600; letter-spacing:.03em; padding:4px 9px; border-radius:11px;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  cursor:pointer; white-space:nowrap;
+}
+.chip[aria-pressed="true"]{
+  background:var(--navy); border-color:var(--navy); color:#fff;
+}
+ul.rows{list-style:none; margin:0; padding:0}
+ul.rows li{
+  padding:9px 0; border-bottom:1px solid var(--border); font-size:.95rem;
+}
+ul.rows li a{color:var(--text); text-decoration:none}
+ul.rows li a:hover{color:var(--cardinal)}
+ul.rows .who{display:block; font-size:.82rem; color:var(--muted); margin-top:2px}
+ul.rows .src{
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif; font-size:.66rem;
+  font-weight:600; color:var(--cardinal); margin-right:7px;
+  text-transform:none; white-space:nowrap;
+}
+.nomatch{color:var(--muted); font-style:italic; padding:14px 0}
+footer{
+  margin-top:52px; padding-top:18px; border-top:1px solid var(--border);
+  font-size:.85rem; color:var(--muted);
+}
+footer h4{
+  margin:0 0 8px; font-size:.72rem; letter-spacing:.07em;
+  text-transform:uppercase; color:var(--cardinal);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+footer ul{margin:0 0 16px; padding-left:20px}
+footer li{margin-bottom:5px; word-break:break-word}
+footer .ok{color:var(--muted)}
+@media (max-width:600px){
+  body{font-size:17px}
+  header.masthead{padding:26px 18px 22px}
+  h1{font-size:1.6rem}
+  .wrap{padding:0 16px 48px}
+}
+</style>
+</head>
+<body>
+<header class="masthead"><div class="masthead-inner">
+<h1>Paper Briefing</h1>
+<p class="dateline">Sunday, 13 September 2026</p>
+<p class="counts">20 new items across 4 threads &middot; 52 screened &middot; 46 of 50 sources reached</p>
+<details class="sources"><summary>Sources queried this run</summary><div class="list">NBER Working Papers · NEP: Business, Economic and Financial History · NEP: Econometrics · NEP: Positive Political Economics · NEP: Sports and Economics · NEP: Cultural Economics · NEP: Evolutionary Economics · NEP: Economic Growth · NEP: History and Philosophy of Economics · NEP: Public Economics · NEP: Demographic Economics · NEP: Migration · NEP: International Trade · NEP: Labour Economics · NEP: Development · NEP: Cognitive and Behavioural Economics · American Economic Review · Econometrica · Journal of Political Economy · Quarterly Journal of Economics · Review of Economic Studies · AEJ: Applied Economics · AEJ: Economic Policy · Review of Economics and Statistics · Journal of Economic Literature · Journal of Economic Perspectives · Journal of Economic History · Explorations in Economic History · European Review of Economic History · Cliometrica · Economic History Review · Public Choice · Journal of Institutional Economics · Quarterly Journal of Political Science · American Political Science Review · Journal of Economic Growth · Journal of Sports Economics · Cowles Foundation Discussion Papers (Yale) · Northwestern CMS-EMS Discussion Papers · Harvard HIER Discussion Papers · UC Berkeley IBER Working Papers · UCLA Economics Working Papers · UC eScholarship Economics Working Papers · CERGE-EI Working Papers · Becker Friedman Institute Working Papers · Princeton IES Working Papers</div></details>
+</div></header>
+<div class="wrap">
+<h2 class="thread">Quantitative Economic History</h2>
+<p class="thread-count">1 item</p>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:cpr:ceprdp:19839?ref=nep-int" target="_blank" rel="noopener">Currency Wars and Trade</a></h3>
+<p class="meta"><span class="badge">NEP-INT</span> <span class="series" title="CEPR Discussion Papers, Centre for Economic Policy Research">CEPR Discussion Papers</span> Mitchener, Kris, Wandschneider, Kirsten <span class="sep"> &middot; 2025-01</span></p>
+<p class="note">Uses newly compiled high-frequency bilateral trade data to identify how the 1929-1936 currency war among 70+ devaluing countries reduced global trade flows, a cliometric take on the Great Depression.</p>
+</div>
+<h2 class="thread">Causal Inference &amp; Applied Microeconometrics</h2>
+<p class="thread-count">17 items</p>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.22890?ref=nep-ecm" target="_blank" rel="noopener">Randomization tests for model specification in causal inference under network interference</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Supriya Tiwari, Pallavi Basu <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Proposes randomization-based specification tests for the exposure mapping used to identify spillover effects in network-interference settings, addressing a design choice usually left unchecked in applied work.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.22957?ref=nep-ecm" target="_blank" rel="noopener">Identification and Inference for Causal Effects in Extremes under General Conditions</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Lisa Leimenstoll, Melanie Schienle <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Extends causal identification and inference to tail (extreme) outcomes via a causal tail coefficient, moving beyond the average-effect focus of most causal inference work.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.18375?ref=nep-ecm" target="_blank" rel="noopener">Difference-in-Differences Models in the Presence of Time-Varying Mediators</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Kyunghoon Ban, Zhengrun Chen, D\&#x27;esir\&#x27;e K\&#x27;edagni <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Shows that standard DiD/TWFE estimands mix direct, indirect and trend-bias components when an endogenous time-varying mediator sits between treatment and outcome, and proposes a fix.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.00136?ref=nep-ecm" target="_blank" rel="noopener">A Nonparametric Test for Cross-Unit Spillovers</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Margherita Comola, Camila Comunello, Abhimanyu Gupta <span class="sep"> &middot; 2026-07</span></p>
+<p class="note">Develops a nonparametric test for cross-unit spillovers operating through peers&#x27; attributes or outcomes, requiring estimation only under the null of no interference.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.18973?ref=nep-ecm" target="_blank" rel="noopener">Don&#x27;t Drop the Singletons: Efficient Inference for Pairwise Experiments with Independent Attrition</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Simon He{\ss}, Patrick W. Schmidt <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Argues against the common practice of dropping incomplete pairs in pairwise-randomized experiments with attrition, proposing an estimator that retains singletons for efficiency.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.22706?ref=nep-ecm" target="_blank" rel="noopener">Double/Debiased Machine Learning for Functional-Form-Robust Spatial Autoregression</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Jieun Lee <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Develops double/debiased machine learning inference for spatial autoregressive parameters when the spatial interaction structure itself is learned flexibly from potentially endogenous data rather than assumed known.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.22286?ref=nep-ecm" target="_blank" rel="noopener">Uniform Inference on Quantile Effects under Network Interference</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Zequn Jin, Gaoqian Xu, Zixin Yang, Zhengyu Zhang <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Derives uniform inference for quantile treatment and spillover effects in network experiments, capturing heterogeneity that average spillover effects mask.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.18057?ref=nep-ecm" target="_blank" rel="noopener">The Limits of Experimental Design: Covariate Balance Beyond Low Dimension</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Max Cytrynbaum <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Proves an impossibility result on how few covariates an experimental design can balance while still approaching the semiparametric efficiency bound, with new designs for the high-dimensional regime.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:nbr:nberwo:35481?ref=nep-ecm" target="_blank" rel="noopener">Inference with AI-Generated Covariates</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> Junting Duan, Markus Pelger <span class="sep"> &middot; 2026-07</span></p>
+<p class="note">Formalizes how LLM-extracted features used as covariates (hallucination, look-ahead bias) can invalidate downstream inference even after standard corrections, directly bearing on LLM-assisted coding as a measurement source.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.23508?ref=nep-ecm" target="_blank" rel="noopener">Testing selection on observables in parametric models with refreshment samples</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Grigory Franguridi, Arie Kapteyn <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Develops a test of missing-at-random selection in panels using refreshment samples, comparing IPW-based and refreshment-based distribution estimates.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.04839?ref=nep-ecm" target="_blank" rel="noopener">Exact Inference in Fixed-Effect Regressions with Concentrated Identifying Variation</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Stanis{\l}aw M. S. Halkiewicz <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Shows that inference validity in saturated fixed-effects regressions depends on the concentration of identifying variation rather than its total amount, undermining fixed critical values in that regime.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.00336?ref=nep-ecm" target="_blank" rel="noopener">Measurement Error and Peer Effects in Networks</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Yann Bramoull\&#x27;e, Sebastiaan Maes <span class="sep"> &middot; 2026-07</span></p>
+<p class="note">Finds that mismeasured regressors can inflate rather than attenuate estimated peer effects in linear-in-means models, with network structure aiding identification without external instruments.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.06053?ref=nep-ecm" target="_blank" rel="noopener">Fixed-Effect Saturation Is Not Weak Identification: Certifying Inference under Measurement Error</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Stanis{\l}aw M. S. Halkiewicz <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Clarifies that fixed-effect saturation alone does not cause weak identification, but classical measurement error in treatment does, and derives Stock-Yogo-style critical values for the resulting bias.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.23315?ref=nep-ecm" target="_blank" rel="noopener">Classification testing: A new framework for drawing qualitative conclusions from quantitative estimates</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Andrew C. Eggers, Zikai Li <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Proposes &#x27;classification testing&#x27; as an alternative to single-hypothesis tests, letting researchers assign an estimate to a substantively meaningful class rather than reject or fail to reject one null.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:tin:wpaper:20260056?ref=nep-ecm" target="_blank" rel="noopener">When Is the Mover-Design Event Study Coefficient a Place-Effect Share?</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Tinbergen Institute Discussion Papers, Tinbergen Institute">Tinbergen Institute Discussion Papers</span> Vahid Moghani <span class="sep"> &middot; 2026-08-11</span></p>
+<p class="note">Shows the mover-design event-study coefficient, widely used to split place effects from sorting, only supports its usual cross-sectional interpretation under a testable directional-isotropy condition on how movers connect locations.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.23524?ref=nep-ecm" target="_blank" rel="noopener">The Measurement Revolution? Credible Measurement and Inference in the Age of AI</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="Papers, arXiv.org">Papers</span> Melissa Dell, Ashesh Rambachan <span class="sep"> &middot; 2026-08</span></p>
+<p class="note">Reviews how AI-driven measurement shifts the applied bottleneck from finding any scalable measure to choosing among many, with direct stakes for credible inference wherever LLM-assisted coding replaces manual extraction.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:ags:aaea26:404723?ref=nep-ecm" target="_blank" rel="noopener">Beyond Condition Numbers: Diagnosing Collinearity in Heckman Models</a></h3>
+<p class="meta"><span class="badge">NEP-ECM</span> <span class="series" title="2026 Annual Meeting, July 26 - 28, 2026, Kansas City, Missouri, Agricultural and Applied Economics Association">2026 Annual Meeting</span> Honny, Emmanuel, Chung, Chanjin <span class="sep"> &middot; 2026</span></p>
+<p class="note">Proposes diagnostics for collinearity in Heckman selection models that go beyond simple condition numbers.</p>
+</div>
+<h2 class="thread">Institutional &amp; Political Economy</h2>
+<p class="thread-count">2 items</p>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:ces:ceswps:_12903?ref=nep-int" target="_blank" rel="noopener">Identity, Electoral Preferences, and Voting in Times of Geopolitical Trade Conflicts</a></h3>
+<p class="meta"><span class="badge">NEP-INT</span> <span class="series" title="CESifo Working Paper Series, CESifo">CESifo Working Paper Series</span> Toshihiro Okubo, Ilan Noy <span class="sep"> &middot; 2026</span></p>
+<p class="note">Uses a Japanese worker panel around the 2025 US tariff and China-Taiwan shocks to show trade-policy attitudes and voting shift with workers&#x27; identification with their employer and its trade exposure, not just individual material interest.</p>
+</div>
+<div class="card">
+<h3><a href="https://doi.org/10.1007/s11127-026-01443-0" target="_blank" rel="noopener">A theory of conspiracy theories</a></h3>
+<p class="meta"><span class="badge">PubChoice</span> Serhan Cevik <span class="sep"> &middot; 2026-09-12</span></p>
+<p class="note">A Public Choice theory paper on why conspiracy theories persist and spread, framing belief formation as a political-economy problem of trust in institutions.</p>
+</div>
+<h2 class="thread">Sports Economics</h2>
+<p class="empty">No new items today.</p>
+<details class="browse" id="browse"><summary>Everything else (32)</summary><p class="hint">Fetched and recorded, but not written up. Filter by source or search titles and authors.</p><div class="filters"><input type="search" placeholder="Search titles and authors…" aria-label="Search titles and authors"><button class="chip" type="button" aria-pressed="false" data-source="NEP-ECM">NEP-ECM 16</button><button class="chip" type="button" aria-pressed="false" data-source="NEP-INT">NEP-INT 16</button></div><ul class="rows"><li data-source="NEP-ECM" data-text="a common european business cycle: markov-switching sur with cross-sectional weighting michael dueker inés kishkill martín sola department of economics working papers, universidad torcuato di tella"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:udt:wpecon:2026_05?ref=nep-ecm" target="_blank" rel="noopener">A Common European Business Cycle: Markov-Switching SUR with Cross-Sectional Weighting</a><span class="who"><span title="Department of Economics Working Papers, Universidad Torcuato Di Tella">Department of Economics Working Papers</span> &middot; Michael Dueker, Inés Kishkill, Martín Sola</span></li><li data-source="NEP-ECM" data-text="a fully nonlinear structural vector autoregressive model identified via independent innovation analysis savi virolainen papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.03486?ref=nep-ecm" target="_blank" rel="noopener">A fully nonlinear structural vector autoregressive model identified via independent innovation analysis</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Savi Virolainen</span></li><li data-source="NEP-ECM" data-text="bandwidth-free inference for recursive nonlinear impulse response functions guilherme vianna papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.02943?ref=nep-ecm" target="_blank" rel="noopener">Bandwidth-Free Inference for Recursive Nonlinear Impulse Response Functions</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Guilherme Vianna</span></li><li data-source="NEP-ECM" data-text="causal non-causal state space models and the modelling of financial bubbles frederik bjerg krabbe papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.28115?ref=nep-ecm" target="_blank" rel="noopener">Causal Non-causal State Space Models and the Modelling of Financial Bubbles</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Frederik Bjerg Krabbe</span></li><li data-source="NEP-ECM" data-text="composite univariate modeling of realized covariance matrix dynamics and volatility-at-risk justus holman andre lucas anne opschoor tinbergen institute discussion papers, tinbergen institute"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:tin:wpaper:20260061?ref=nep-ecm" target="_blank" rel="noopener">Composite Univariate Modeling of Realized Covariance Matrix Dynamics and Volatility-at-Risk</a><span class="who"><span title="Tinbergen Institute Discussion Papers, Tinbergen Institute">Tinbergen Institute Discussion Papers</span> &middot; Justus Holman, Andre Lucas, Anne Opschoor</span></li><li data-source="NEP-ECM" data-text="conditional projection methods for large-scale bayesian vars niko hauzenberger michael pfarrhofer papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2607.29215?ref=nep-ecm" target="_blank" rel="noopener">Conditional projection methods for large-scale Bayesian VARs</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Niko Hauzenberger, Michael Pfarrhofer</span></li><li data-source="NEP-ECM" data-text="confidence sets for the date of a weak mean break in functional data yicong lin tinbergen institute discussion papers, tinbergen institute"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:tin:wpaper:20260055?ref=nep-ecm" target="_blank" rel="noopener">Confidence Sets for the Date of a Weak Mean Break in Functional Data</a><span class="who"><span title="Tinbergen Institute Discussion Papers, Tinbergen Institute">Tinbergen Institute Discussion Papers</span> &middot; Yicong Lin</span></li><li data-source="NEP-ECM" data-text="curvature-calibrated quasi-bayesian updating for moment-restricted models masahiro tanaka papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.19634?ref=nep-ecm" target="_blank" rel="noopener">Curvature-Calibrated Quasi-Bayesian Updating for Moment-Restricted Models</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Masahiro Tanaka</span></li><li data-source="NEP-ECM" data-text="dynamic discrete choice and inverse reinforcement learning: inferring preferences and beliefs from human behavior pranjal rawat john rust papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.24362?ref=nep-ecm" target="_blank" rel="noopener">Dynamic Discrete Choice and Inverse Reinforcement Learning: Inferring Preferences and Beliefs From Human Behavior</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Pranjal Rawat, John Rust</span></li><li data-source="NEP-ECM" data-text="exact rejection sampling for non-gaussian state space models joshua c. c. chan papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.21619?ref=nep-ecm" target="_blank" rel="noopener">Exact Rejection Sampling for Non-Gaussian State Space Models</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Joshua C. C. Chan</span></li><li data-source="NEP-ECM" data-text="fixed-$t$ dynamic spatial panel model with common shocks jushan bai jesse chieh chen papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.22499?ref=nep-ecm" target="_blank" rel="noopener">Fixed-$T$ Dynamic Spatial Panel Model with Common Shocks</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Jushan Bai, Jesse Chieh Chen</span></li><li data-source="NEP-ECM" data-text="joint eigenvector and eigenvalue dynamics with an application to time-varying covariance matrices justus holman yicong lin andre lucas anne opschoor tinbergen institute discussion papers, tinbergen institute"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:tin:wpaper:20260060?ref=nep-ecm" target="_blank" rel="noopener">Joint Eigenvector and Eigenvalue Dynamics with an Application to Time-Varying Covariance Matrices</a><span class="who"><span title="Tinbergen Institute Discussion Papers, Tinbergen Institute">Tinbergen Institute Discussion Papers</span> &middot; Justus Holman, Yicong Lin, Andre Lucas, Anne Opschoor</span></li><li data-source="NEP-ECM" data-text="parameter identification in autoregressions under discrete sampling or temporal aggregation marko mlikota papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.13224?ref=nep-ecm" target="_blank" rel="noopener">Parameter Identification in Autoregressions under Discrete Sampling or Temporal Aggregation</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Marko Mlikota</span></li><li data-source="NEP-ECM" data-text="repairing locally misspecified gmm: an empirical bayes approach patrick kline papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.23925?ref=nep-ecm" target="_blank" rel="noopener">Repairing Locally Misspecified GMM: An Empirical Bayes Approach</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Patrick Kline</span></li><li data-source="NEP-ECM" data-text="sequentially valid inference for probabilistic inflation forecasts amadeo grob maurizio daniele johanna ziegel papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.23064?ref=nep-ecm" target="_blank" rel="noopener">Sequentially valid inference for probabilistic inflation forecasts</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Amadeo Grob, Maurizio Daniele, Johanna Ziegel</span></li><li data-source="NEP-ECM" data-text="testing for smooth structural change in cointegrated systems haofeng liao xing wang papers, arxiv.org"><span class="src">NEP-ECM</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.03773?ref=nep-ecm" target="_blank" rel="noopener">Testing for Smooth Structural Change in Cointegrated Systems</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Haofeng Liao, Xing Wang</span></li><li data-source="NEP-INT" data-text="cheap energy might not be enough : a trade model of ai compute services lokshin, michael m. policy research working paper series, the world bank"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:wbk:wbrwps:11426?ref=nep-int" target="_blank" rel="noopener">Cheap Energy Might Not Be Enough : A Trade Model of AI Compute Services</a><span class="who"><span title="Policy Research Working Paper Series, The World Bank">Policy Research Working Paper Series</span> &middot; Lokshin, Michael M.</span></li><li data-source="NEP-INT" data-text="deep integration and trade: uk firms in the wake of brexit freeman, rebecca garofalo, marco longoni, enrico manova, kalina mari, rebecca prayer, thomas sampson, thomas cepr discussion papers, centre for economic policy research"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:cpr:ceprdp:19869?ref=nep-int" target="_blank" rel="noopener">Deep Integration and Trade: UK Firms in the Wake of Brexit</a><span class="who"><span title="CEPR Discussion Papers, Centre for Economic Policy Research">CEPR Discussion Papers</span> &middot; Freeman, Rebecca, Garofalo, Marco, Longoni, Enrico, Manova, Kalina, Mari, Rebecca, Prayer, Thomas &amp; 1 more</span></li><li data-source="NEP-INT" data-text="e-commerce provisions and free trade agreements houssein guimbard camilo umana-dajud working papers, cepii research center"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:cii:cepidt:2026-08?ref=nep-int" target="_blank" rel="noopener">E-Commerce Provisions and Free Trade Agreements</a><span class="who"><span title="Working Papers, CEPII research center">Working Papers</span> &middot; Houssein Guimbard, Camilo Umana-Dajud</span></li><li data-source="NEP-INT" data-text="how did trump&#x27;s 2025 trade war affect the decoupling of us-china supply chains? chad p. bown working paper series, peterson institute for international economics"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:iie:wpaper:wp26-14?ref=nep-int" target="_blank" rel="noopener">How did Trump&#x27;s 2025 trade war affect the decoupling of US-China supply chains?</a><span class="who"><span title="Working Paper Series, Peterson Institute for International Economics">Working Paper Series</span> &middot; Chad P. Bown</span></li><li data-source="NEP-INT" data-text="import liberalization as export destruction? evidence from the united states breinlich, holger leromain, elsa novy, dennis sampson, thomas lse research online documents on economics, london school of economics and political science, lse library"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:ehl:lserod:127595?ref=nep-int" target="_blank" rel="noopener">Import liberalization as export destruction? Evidence from the United States</a><span class="who"><span title="LSE Research Online Documents on Economics, London School of Economics and Political Science, LSE Library">LSE Research Online Documents on Economics</span> &middot; Breinlich, Holger, Leromain, Elsa, Novy, Dennis, Sampson, Thomas</span></li><li data-source="NEP-INT" data-text="made with china: global supply chains and the limits of us decoupling mary e. lovely christine y. wan policy briefs, peterson institute for international economics"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:iie:pbrief:pb26-12?ref=nep-int" target="_blank" rel="noopener">Made with China: Global supply chains and the limits of US decoupling</a><span class="who"><span title="Policy Briefs, Peterson Institute for International Economics">Policy Briefs</span> &middot; Mary E. Lovely, Christine Y. Wan</span></li><li data-source="NEP-INT" data-text="not all waste trades alike: material archetypes in the gravity of global waste flows stefano bolatto filippo santi maria tremuli working papers, international network for economic research - infer"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:inf:wpaper:2026.05?ref=nep-int" target="_blank" rel="noopener">Not All Waste Trades Alike: Material Archetypes in the Gravity of Global Waste Flows</a><span class="who"><span title="Working Papers, International Network for Economic Research - INFER">Working Papers</span> &middot; Stefano Bolatto, Filippo Santi, Maria Tremuli</span></li><li data-source="NEP-INT" data-text="rta exit and trade: evidence from losing shared trade agreement yao, zhixiao cepie working papers, technische universität dresden, center of public and international economics (cepie)"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:zbw:tudcep:342518?ref=nep-int" target="_blank" rel="noopener">RTA exit and trade: Evidence from losing shared trade agreement</a><span class="who"><span title="CEPIE Working Papers, Technische Universität Dresden, Center of Public and International Economics (CEPIE)">CEPIE Working Papers</span> &middot; Yao, Zhixiao</span></li><li data-source="NEP-INT" data-text="revisiting russian war-time import substitution simola, heli bofit policy briefs, bank of finland institute for emerging economies (bofit)"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:zbw:bofitb:342399?ref=nep-int" target="_blank" rel="noopener">Revisiting Russian war-time import substitution</a><span class="who"><span title="BOFIT Policy Briefs, Bank of Finland Institute for Emerging Economies (BOFIT)">BOFIT Policy Briefs</span> &middot; Simola, Heli</span></li><li data-source="NEP-INT" data-text="the price impact of canadian retaliatory tariffs alberto cavallo olena kostyshyna oleksiy kryvtsov matías vieyra staff working papers, bank of canada"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:bca:bocawp:26-22?ref=nep-int" target="_blank" rel="noopener">The Price Impact of Canadian Retaliatory Tariffs</a><span class="who"><span title="Staff Working Papers, Bank of Canada">Staff Working Papers</span> &middot; Alberto Cavallo, Olena Kostyshyna, Oleksiy Kryvtsov, Matías Vieyra</span></li><li data-source="NEP-INT" data-text="theory-consistent tariff aggregation james e. anderson mario larch serge shikher yoto v. yotov cesifo working paper series, cesifo"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:ces:ceswps:_12902?ref=nep-int" target="_blank" rel="noopener">Theory-Consistent Tariff Aggregation</a><span class="who"><span title="CESifo Working Paper Series, CESifo">CESifo Working Paper Series</span> &middot; James E. Anderson, Mario Larch, Serge Shikher, Yoto V. Yotov</span></li><li data-source="NEP-INT" data-text="trade diversion and jobs: evidence from mexican municipalities rodriguez castelan, carlos vazquez, emmanuel winkler, hernan iza discussion papers, iza network @ liser"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:iza:izadps:dp18791?ref=nep-int" target="_blank" rel="noopener">Trade Diversion and Jobs: Evidence from Mexican Municipalities</a><span class="who"><span title="IZA Discussion Papers, IZA Network @ LISER">IZA Discussion Papers</span> &middot; Rodriguez Castelan, Carlos, Vazquez, Emmanuel, Winkler, Hernan</span></li><li data-source="NEP-INT" data-text="trade policy shocks under the second trump administration houssein guimbard working papers, cepii research center"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:cii:cepidt:2026-07?ref=nep-int" target="_blank" rel="noopener">Trade Policy Shocks under the Second Trump Administration</a><span class="who"><span title="Working Papers, CEPII research center">Working Papers</span> &middot; Houssein Guimbard</span></li><li data-source="NEP-INT" data-text="trade sanctions: evidence from russia crozet, matthieu hinz, julian šváb, patrik kiel working papers, kiel institute for the world economy"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:zbw:ifwkwp:342567?ref=nep-int" target="_blank" rel="noopener">Trade sanctions: Evidence from Russia</a><span class="who"><span title="Kiel Working Papers, Kiel Institute for the World Economy">Kiel Working Papers</span> &middot; Crozet, Matthieu, Hinz, Julian, Šváb, Patrik</span></li><li data-source="NEP-INT" data-text="trump&#x27;s tariffs: a deal is a deal? an empirical analysis of the effective us import tariff rates on the eu, china and others sultan, samina gros, daniel rotondi, niccolò iw-reports, institut der deutschen wirtschaft (iw) / german economic institute"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:zbw:iwkrep:342421?ref=nep-int" target="_blank" rel="noopener">Trump&#x27;s tariffs: A deal is a deal? An empirical analysis of the effective US import tariff rates on the EU, China and others</a><span class="who"><span title="IW-Reports, Institut der deutschen Wirtschaft (IW) / German Economic Institute">IW-Reports</span> &middot; Sultan, Samina, Gros, Daniel, Rotondi, Niccolò</span></li><li data-source="NEP-INT" data-text="why are german exports benefiting less from global growth than they used to? salzmann, leonard schulz, philipp econstor preprints, zbw - leibniz information centre for economics"><span class="src">NEP-INT</span><a href="https://econpapers.repec.org/RePEc:zbw:esprep:341913?ref=nep-int" target="_blank" rel="noopener">Why are German exports benefiting less from global growth than they used to?</a><span class="who"><span title="EconStor Preprints, ZBW - Leibniz Information Centre for Economics">EconStor Preprints</span> &middot; Salzmann, Leonard, Schulz, Philipp</span></li></ul><p class="nomatch" style="display:none">Nothing matches that filter.</p></details>
+<footer>
+<h4>Sources that failed this run</h4><ul>
+<li><strong>arXiv General Economics</strong> &mdash; HTTPError: 429 Client Error: Unknown Error for url: https://export.arxiv.org/api/query?search_query=cat:econ.GN&amp;sortBy=submittedDate&amp;sortOrder=descending&amp;max_results=100</li>
+<li><strong>arXiv Econometrics</strong> &mdash; ReadTimeout: HTTPSConnectionPool(host=&#x27;export.arxiv.org&#x27;, port=443): Read timed out. (read timeout=25)</li>
+<li><strong>SSRN Economic History Network eJournal</strong> &mdash; EGRESS_BLOCKED via WebFetch (www.ssrn.com); WebSearch returned no dated listing of new papers</li>
+<li><strong>SSRN Political Economy Network eJournal</strong> &mdash; EGRESS_BLOCKED via WebFetch (www.ssrn.com); WebSearch returned no dated listing of new papers</li>
+</ul>
+<p class="ok">Generated by the paper-briefing routine. Items are shown once, ever &mdash; anything already reported on a previous morning is filtered out.</p>
+</footer></div>
+
+<script>
+(function(){
+  var root = document.getElementById('browse');
+  if (!root) return;
+  var box   = root.querySelector('input');
+  var chips = Array.prototype.slice.call(root.querySelectorAll('.chip'));
+  var rows  = Array.prototype.slice.call(root.querySelectorAll('ul.rows li'));
+  var none  = root.querySelector('.nomatch');
+  var active = null;
+
+  function refresh(){
+    var q = (box.value || '').trim().toLowerCase();
+    var shown = 0;
+    rows.forEach(function(li){
+      var okSrc = !active || li.getAttribute('data-source') === active;
+      var okTxt = !q || li.getAttribute('data-text').indexOf(q) !== -1;
+      var show = okSrc && okTxt;
+      li.style.display = show ? '' : 'none';
+      if (show) shown++;
+    });
+    none.style.display = shown ? 'none' : '';
+  }
+
+  box.addEventListener('input', refresh);
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      var v = c.getAttribute('data-source');
+      active = (active === v) ? null : v;
+      chips.forEach(function(o){
+        o.setAttribute('aria-pressed', o.getAttribute('data-source') === active);
+      });
+      refresh();
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
