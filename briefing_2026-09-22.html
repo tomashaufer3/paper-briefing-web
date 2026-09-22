@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Paper Briefing 2026-09-22</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#003657; --navy-deep:#002841; --cardinal:#d22d40;
+  --bg:#ffffff; --surface:#ffffff; --text:#1a1a1a; --muted:#5c5c5c;
+  --border:#e4e4e4; --band-text:#ffffff; --shadow:0 1px 2px rgba(0,0,0,.06);
+}
+/* Light by default, deliberately: the digest is read in the morning and on
+   a hosted page where the viewer's OS theme is not a useful signal. Dark is
+   still available, but only when explicitly selected. */
+:root[data-theme="dark"]{
+  --navy:#7fb0d4; --navy-deep:#0d1b26; --cardinal:#e8697a;
+  --bg:#11151a; --surface:#181d24; --text:#e9e6e2; --muted:#9aa4ae;
+  --border:#2a323b; --band-text:#eaf2f8; --shadow:none;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"EB Garamond",Garamond,"Adobe Garamond Pro","Palatino Linotype",
+              Palatino,Georgia,serif;
+  font-size:18px; line-height:1.55;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 20px 64px}
+header.masthead{
+  background:var(--navy-deep); color:var(--band-text);
+  padding:34px 20px 28px; margin-bottom:34px;
+  border-bottom:4px solid var(--cardinal);
+}
+.masthead-inner{max-width:820px; margin:0 auto}
+h1{
+  margin:0 0 6px; font-size:2.1rem; font-weight:600; letter-spacing:.01em;
+  color:var(--band-text);
+}
+.dateline{margin:0; font-size:1rem; color:var(--band-text); opacity:.85}
+.counts{margin:14px 0 0; font-size:.9rem; color:var(--band-text); opacity:.8}
+details.sources{margin-top:12px; font-size:.85rem; color:var(--band-text)}
+details.sources summary{cursor:pointer; opacity:.85}
+details.sources .list{
+  margin-top:8px; opacity:.8; line-height:1.7; word-break:break-word;
+}
+h2.thread{
+  font-size:1.28rem; font-weight:600; margin:38px 0 4px; color:var(--navy);
+  padding-bottom:7px; border-bottom:2px solid var(--navy);
+}
+.thread-count{font-size:.82rem; color:var(--muted); margin:0 0 16px}
+.card{
+  background:var(--surface); border:1px solid var(--border);
+  border-left:3px solid var(--cardinal); border-radius:3px;
+  padding:15px 18px; margin-bottom:14px; box-shadow:var(--shadow);
+}
+.card h3{margin:0 0 5px; font-size:1.08rem; font-weight:600; line-height:1.35}
+.card h3 a{color:var(--text); text-decoration:none;
+  border-bottom:1px solid transparent}
+.card h3 a:hover{color:var(--cardinal); border-bottom-color:var(--cardinal)}
+.meta{margin:0 0 9px; font-size:.86rem; color:var(--muted)}
+.badge{
+  display:inline-block; background:var(--cardinal); color:#fff;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:.7rem; font-weight:600; letter-spacing:.03em;
+  padding:2px 7px; border-radius:2px;
+  margin-right:8px; vertical-align:1px; white-space:nowrap;
+}
+.meta .series{color:var(--navy); font-style:italic}
+.kw{margin:0 0 8px; display:flex; flex-wrap:wrap; gap:5px}
+.kw span{
+  display:inline-block; border:1px solid var(--navy); color:var(--navy);
+  background:transparent; font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:.64rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+  padding:1px 6px; border-radius:9px; white-space:nowrap;
+}
+.card.flagged{border-left-width:5px}
+.alarm{
+  background:var(--cardinal); color:#fff; padding:12px 16px; border-radius:3px;
+  margin:14px 0 0; font-size:.92rem;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.alarm strong{font-weight:700}
+.note{margin:0; font-size:.95rem}
+.note::before{
+  content:"Why it matters "; color:var(--cardinal); font-weight:600;
+  font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.empty{
+  color:var(--muted); font-style:italic; margin:0 0 8px; padding:10px 0;
+  font-size:.95rem;
+}
+/* Browse section: everything fetched that did not earn a written note. */
+.browse{margin-top:46px; border-top:2px solid var(--navy); padding-top:8px}
+.browse > summary{
+  cursor:pointer; font-size:1.28rem; font-weight:600; color:var(--navy);
+  padding:8px 0; list-style:none;
+}
+.browse > summary::-webkit-details-marker{display:none}
+.browse > summary::before{content:"\25B8 "; font-size:.9em}
+.browse[open] > summary::before{content:"\25BE "}
+.browse .hint{font-size:.85rem; color:var(--muted); margin:2px 0 14px}
+.filters{
+  display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:16px;
+}
+.filters input{
+  font-family:inherit; font-size:.92rem; padding:6px 10px; flex:1 1 190px;
+  border:1px solid var(--border); border-radius:3px;
+  background:var(--surface); color:var(--text);
+}
+.chip{
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif; font-size:.7rem;
+  font-weight:600; letter-spacing:.03em; padding:4px 9px; border-radius:11px;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  cursor:pointer; white-space:nowrap;
+}
+.chip[aria-pressed="true"]{
+  background:var(--navy); border-color:var(--navy); color:#fff;
+}
+ul.rows{list-style:none; margin:0; padding:0}
+ul.rows li{
+  padding:9px 0; border-bottom:1px solid var(--border); font-size:.95rem;
+}
+ul.rows li a{color:var(--text); text-decoration:none}
+ul.rows li a:hover{color:var(--cardinal)}
+ul.rows .who{display:block; font-size:.82rem; color:var(--muted); margin-top:2px}
+ul.rows .src{
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif; font-size:.66rem;
+  font-weight:600; color:var(--cardinal); margin-right:7px;
+  text-transform:none; white-space:nowrap;
+}
+.nomatch{color:var(--muted); font-style:italic; padding:14px 0}
+footer{
+  margin-top:52px; padding-top:18px; border-top:1px solid var(--border);
+  font-size:.85rem; color:var(--muted);
+}
+footer h4{
+  margin:0 0 8px; font-size:.72rem; letter-spacing:.07em;
+  text-transform:uppercase; color:var(--cardinal);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+footer ul{margin:0 0 16px; padding-left:20px}
+footer li{margin-bottom:5px; word-break:break-word}
+footer .ok{color:var(--muted)}
+@media (max-width:600px){
+  body{font-size:17px}
+  header.masthead{padding:26px 18px 22px}
+  h1{font-size:1.6rem}
+  .wrap{padding:0 16px 48px}
+}
+</style>
+</head>
+<body>
+<header class="masthead"><div class="masthead-inner">
+<h1>Paper Briefing</h1>
+<p class="dateline">Tuesday, 22 September 2026</p>
+<p class="counts">12 new items across 4 threads &middot; 76 screened &middot; 48 of 50 sources reached</p>
+<details class="sources"><summary>Sources queried this run</summary><div class="list">NBER Working Papers · arXiv General Economics · arXiv Econometrics · NEP: Business, Economic and Financial History · NEP: Econometrics · NEP: Positive Political Economics · NEP: Sports and Economics · NEP: Cultural Economics · NEP: Evolutionary Economics · NEP: Economic Growth · NEP: History and Philosophy of Economics · NEP: Public Economics · NEP: Demographic Economics · NEP: Migration · NEP: International Trade · NEP: Labour Economics · NEP: Development · NEP: Cognitive and Behavioural Economics · American Economic Review · Econometrica · Journal of Political Economy · Quarterly Journal of Economics · Review of Economic Studies · AEJ: Applied Economics · AEJ: Economic Policy · Review of Economics and Statistics · Journal of Economic Literature · Journal of Economic Perspectives · Journal of Economic History · Explorations in Economic History · European Review of Economic History · Cliometrica · Economic History Review · Public Choice · Journal of Institutional Economics · Quarterly Journal of Political Science · American Political Science Review · Journal of Economic Growth · Journal of Sports Economics · Cowles Foundation Discussion Papers (Yale) · Northwestern CMS-EMS Discussion Papers · Harvard HIER Discussion Papers · UC Berkeley IBER Working Papers · UCLA Economics Working Papers · UC eScholarship Economics Working Papers · CERGE-EI Working Papers · Becker Friedman Institute Working Papers · Princeton IES Working Papers</div></details>
+</div></header>
+<div class="wrap">
+<h2 class="thread">Quantitative Economic History</h2>
+<p class="thread-count">3 items</p>
+<div class="card">
+<h3><a href="https://www.nber.org/papers/w35768" target="_blank" rel="noopener">Money and Power: Historical Lessons for Stablecoins and U.S. Dollar Dominance</a></h3>
+<p class="meta"><span class="badge">NBER</span> Michael D. Bordo, Carolyn Wilkins <span class="sep"> &middot; September 2026</span></p>
+<p class="note">Draws on historical private-money episodes in the UK, US, Canada, Sweden and Switzerland to assess when stablecoins can function safely and what that implies for dollar dominance.</p>
+</div>
+<div class="card flagged">
+<h3><a href="https://www.nber.org/papers/w35771" target="_blank" rel="noopener">Integration Without Decentralization: The Financial Geography of U.S. Life Insurance, 1880–1940</a></h3>
+<p class="meta"><span class="badge">NBER</span> Pawel Janas <span class="sep"> &middot; September 2026</span></p>
+<p class="kw"><span>digitized</span><span>newly digitized</span></p>
+<p class="note">Uses a newly digitized annual firm-by-firm dataset to show how US life insurance nationalized its market for savings without decentralizing control over those funds, 1880-1940.</p>
+</div>
+<div class="card">
+<h3><a href="https://doi.org/10.1111/ehr.70141" target="_blank" rel="noopener">Blessing in disguise: The persistent economic legacy of the grain tax of British Ceylon</a></h3>
+<p class="meta"><span class="badge">EcHR</span> Sudaraka Ariyaratne <span class="sep"> &middot; 2026-09-21</span></p>
+<p class="note">Builds a novel nineteenth-century dataset on Ceylon&#x27;s paddy grain tax to show the forced shift from subsistence to a cash-tax market economy left a persistent, unexpectedly positive economic legacy.</p>
+</div>
+<h2 class="thread">Causal Inference &amp; Applied Microeconometrics</h2>
+<p class="thread-count">3 items</p>
+<div class="card">
+<h3><a href="http://arxiv.org/abs/2609.23303v1" target="_blank" rel="noopener">Uniform Inference for Parameters Identified by Conditional Quantile Restrictions</a></h3>
+<p class="meta"><span class="badge">arXiv econ.EM</span> Xuqing Lin, Xiaojun Song <span class="sep"> &middot; 2026-09-20</span></p>
+<p class="note">Develops an adaptive penalized-supremum uniform-inference test for parameters identified by conditional quantile restrictions, a common structural/dynamic-model identification device.</p>
+</div>
+<div class="card">
+<h3><a href="http://arxiv.org/abs/2609.22761v1" target="_blank" rel="noopener">Causal inference in two-sided randomization designs: factorial regression, two-way clustering, and covariate adjustment</a></h3>
+<p class="meta"><span class="badge">arXiv econ.EM</span> Pengfei Tian, Jizhou Liu, Lei Shi, Peng Ding <span class="sep"> &middot; 2026-09-19</span></p>
+<p class="note">Works out factorial-regression and two-way-clustering inference for two-sided marketplace experiments where buyers and sellers are randomized independently.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:zbw:glodps:1809?ref=nep-lab" target="_blank" rel="noopener">Intertemporal Elasticity of Labor Supply: Evidence from New York City Taxicab Drivers Using a New Instrument</a></h3>
+<p class="meta"><span class="badge">NEP-LAB</span> <span class="series" title="GLO Discussion Paper Series, Global Labor Organization (GLO)">GLO Discussion Paper Series</span> Kamble, Vikrant V., Motghare, Swapnil <span class="sep"> &middot; 2026</span></p>
+<p class="note">Identifies the intertemporal labour-supply elasticity of NYC taxi drivers (1.7) from a new instrument: random assignment to taximeters with different default tip percentages.</p>
+</div>
+<h2 class="thread">Institutional &amp; Political Economy</h2>
+<p class="thread-count">4 items</p>
+<div class="card">
+<h3><a href="https://www.nber.org/papers/w35758" target="_blank" rel="noopener">Fiscal Populism and Monetary Policy Rules</a></h3>
+<p class="meta"><span class="badge">NBER</span> Luis I. Jácome, Nicolás E. Magud, Samuel Pienknagura, Martín Uribe <span class="sep"> &middot; September 2026</span></p>
+<p class="note">Traces the historical link since 1960 between left-leaning populist regimes, fiscal monetization and inflation, and how that legacy disciplines 21st-century monetary policy rules.</p>
+</div>
+<div class="card">
+<h3><a href="https://www.nber.org/papers/w35777" target="_blank" rel="noopener">Migration, Identity and Political Economy in a Globalizing World</a></h3>
+<p class="meta"><span class="badge">NBER</span> Vasiliki Fouka, Marco Tabellini <span class="sep"> &middot; September 2026</span></p>
+<p class="note">Synthesizes social-psychology and economics to model how immigration reshapes self- and group-identity and, through that channel, political outcomes.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:osf:socarx:489yx_v1?ref=nep-spo" target="_blank" rel="noopener">Gambling Industry Political Engagement, 2020–2026: A Proof-of-Concept for Auditing of Political Transparency Data using a GPT-assisted Pipeline.</a></h3>
+<p class="meta"><span class="badge">NEP-SPO</span> <span class="series" title="SocArXiv, Center for Open Science">SocArXiv</span> Close, James <span class="sep"> &middot; 2026-09-02</span></p>
+<p class="note">Uses a GPT-assisted, independently reconciled extraction pipeline to integrate the UK&#x27;s fragmented gambling-industry political-transparency records.</p>
+</div>
+<div class="card flagged">
+<h3><a href="https://doi.org/10.1017/s0003055426101919" target="_blank" rel="noopener">Imperial Aid and Tax Mobilization in Late Colonial Africa</a></h3>
+<p class="meta"><span class="badge">APSR</span> DIDAC QUERALT <span class="sep"> &middot; 2026-09-21</span></p>
+<p class="kw"><span>archival</span></p>
+<p class="note">Shows Britain&#x27;s Colonial Development and Welfare Fund expanded local tax mobilization only after civil-service reforms screened in officials aligned with the metropole&#x27;s development agenda.</p>
+</div>
+<h2 class="thread">Sports Economics</h2>
+<p class="thread-count">2 items</p>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:iuj:wpaper:ems_2026_17?ref=nep-spo" target="_blank" rel="noopener">Do Identical Win Probabilities Generate Different Perceptions of Uncertainty? Comparing Elections and Sports</a></h3>
+<p class="meta"><span class="badge">NEP-SPO</span> <span class="series" title="Working Papers, Research Institute, International University of Japan">Working Papers</span> Kyohei Yamada <span class="sep"> &middot; 2026-09</span></p>
+<p class="note">Experimentally compares how people perceive numerically identical win probabilities in elections versus sports, using sport as a behavioural-economics testbed for probability perception.</p>
+</div>
+<div class="card">
+<h3><a href="https://econpapers.repec.org/RePEc:arx:papers:2609.06739?ref=nep-spo" target="_blank" rel="noopener">The profit-bias identity in sports betting: bookmaker profit as the public&#x27;s prediction error</a></h3>
+<p class="meta"><span class="badge">NEP-SPO</span> <span class="series" title="Papers, arXiv.org">Papers</span> Jacek P. Dmochowski <span class="sep"> &middot; 2026-09</span></p>
+<p class="note">Derives a profit-bias identity showing bookmaker sports-betting profit equals the public&#x27;s aggregate prediction error, relaxing Levitt (2004)&#x27;s independence assumption on stake shares.</p>
+</div>
+<details class="browse" id="browse"><summary>Everything else (64)</summary><p class="hint">Fetched and recorded, but not written up. Filter by source or search titles and authors.</p><div class="filters"><input type="search" placeholder="Search titles and authors…" aria-label="Search titles and authors"><button class="chip" type="button" aria-pressed="false" data-source="NBER">NBER 24</button><button class="chip" type="button" aria-pressed="false" data-source="NEP-LAB">NEP-LAB 8</button><button class="chip" type="button" aria-pressed="false" data-source="arXiv econ.GN">arXiv econ.GN 6</button><button class="chip" type="button" aria-pressed="false" data-source="NEP-DEM">NEP-DEM 5</button><button class="chip" type="button" aria-pressed="false" data-source="NEP-SPO">NEP-SPO 5</button><button class="chip" type="button" aria-pressed="false" data-source="NEP-MIG">NEP-MIG 4</button><button class="chip" type="button" aria-pressed="false" data-source="ReStat">ReStat 3</button><button class="chip" type="button" aria-pressed="false" data-source="arXiv econ.EM">arXiv econ.EM 3</button><button class="chip" type="button" aria-pressed="false" data-source="BFI">BFI 2</button><button class="chip" type="button" aria-pressed="false" data-source="NEP-CBE">NEP-CBE 2</button><button class="chip" type="button" aria-pressed="false" data-source="QJE">QJE 1</button><button class="chip" type="button" aria-pressed="false" data-source="ReStud">ReStud 1</button></div><ul class="rows"><li data-source="BFI" data-text="democratizing private markets: equilibrium predictions lubos pastor, robert f. stambaugh, lucian a. taylor becker friedman institute working papers"><span class="src">BFI</span><a href="https://bfi.uchicago.edu/working-papers/democratizing-private-markets-equilibrium-predictions/?occurrence_id=0" target="_blank" rel="noopener">Democratizing Private Markets: Equilibrium Predictions</a><span class="who"><span title="Becker Friedman Institute Working Papers">Becker Friedman Institute Working Papers</span> &middot; Lubos Pastor, Robert F. Stambaugh,, Lucian A. Taylor</span></li><li data-source="BFI" data-text="the anatomy and evolution of survey error bruce meyer, nikolas mittag, derek wu, anthony tatarka, patrick langetieg becker friedman institute working papers"><span class="src">BFI</span><a href="https://bfi.uchicago.edu/working-papers/the-anatomy-and-evolution-of-survey-error/?occurrence_id=0" target="_blank" rel="noopener">The Anatomy and Evolution of Survey Error</a><span class="who"><span title="Becker Friedman Institute Working Papers">Becker Friedman Institute Working Papers</span> &middot; Bruce Meyer, Nikolas Mittag, Derek Wu, Anthony Tatarka,, Patrick Langetieg</span></li><li data-source="NBER" data-text="advertising claims, pricing, and customer evidence joshua s. gans nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35770" target="_blank" rel="noopener">Advertising Claims, Pricing, and Customer Evidence</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Joshua S. Gans</span></li><li data-source="NBER" data-text="borrowing in the shadow of china illenin o. kondo césar sosa-padilla zachary j. swaziek nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35767" target="_blank" rel="noopener">Borrowing in the Shadow of China</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Illenin O. Kondo, César Sosa-Padilla, Zachary J. Swaziek</span></li><li data-source="NBER" data-text="can early exposure to the teaching profession increase teacher supply and diversity? new evidence on the teacher pipeline danielle sanderson edwards matthew a. kraft nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35776" target="_blank" rel="noopener">Can Early Exposure to the Teaching Profession Increase Teacher Supply and Diversity? New Evidence on the Teacher Pipeline</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Danielle Sanderson Edwards, Matthew A. Kraft</span></li><li data-source="NBER" data-text="compound delay: the causes and consequences of later grandmotherhood dora l. costa matthew e. kahn nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35773" target="_blank" rel="noopener">Compound Delay: The Causes and Consequences of Later Grandmotherhood</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Dora L. Costa, Matthew E. Kahn</span></li><li data-source="NBER" data-text="cooler laws, safer workers: evaluating california’s heat standard and injury reduction olesya fomenko melissa mcinerney sebastian negrusa nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35772" target="_blank" rel="noopener">Cooler Laws, Safer Workers: Evaluating California’s Heat Standard and Injury Reduction</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Olesya Fomenko, Melissa McInerney, Sebastian Negrusa</span></li><li data-source="NBER" data-text="digital (killer?) acquisitions florian ederer regina seibel timothy simcoe nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35762" target="_blank" rel="noopener">Digital (Killer?) Acquisitions</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Florian Ederer, Regina Seibel, Timothy Simcoe</span></li><li data-source="NBER" data-text="diversification as a process: geographic expansion and the formation of national insurers pawel janas nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35769" target="_blank" rel="noopener">Diversification as a Process: Geographic Expansion and the Formation of National Insurers</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Pawel Janas</span></li><li data-source="NBER" data-text="expectations and the term structure of interest rates pooya molavi alireza tahbaz-salehi andrea vedolin nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35766" target="_blank" rel="noopener">Expectations and the Term Structure of Interest Rates</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Pooya Molavi, Alireza Tahbaz-Salehi, Andrea Vedolin</span></li><li data-source="NBER" data-text="governing global externalities: investor voice amid fragmented policy robin döttling doron levit nadya malenko magdalena rola-janicka nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35778" target="_blank" rel="noopener">Governing Global Externalities: Investor Voice Amid Fragmented Policy</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Robin Döttling, Doron Levit, Nadya Malenko, Magdalena Rola-Janicka</span></li><li data-source="NBER" data-text="incentivizing self-protection from wildfires patrick baylis judson boomhower bob horton chris mulverhill nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35764" target="_blank" rel="noopener">Incentivizing Self-Protection From Wildfires</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Patrick Baylis, Judson Boomhower, Bob Horton, Chris Mulverhill</span></li><li data-source="NBER" data-text="measuring gender attitudes toward men and women joshua t. dean christine l. exley muriel niederle heather sarsons nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35761" target="_blank" rel="noopener">Measuring Gender Attitudes Toward Men and Women</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Joshua T. Dean, Christine L. Exley, Muriel Niederle, Heather Sarsons</span></li><li data-source="NBER" data-text="measuring and projecting u.s. investment in semiconductor manufacturing capacity david m. byrne robert j. kurtzman heidi l. williams nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35779" target="_blank" rel="noopener">Measuring and Projecting U.S. Investment in Semiconductor Manufacturing Capacity</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; David M. Byrne, Robert J. Kurtzman, Heidi L. Williams</span></li><li data-source="NBER" data-text="regulating entrepreneurship: the case of capital requirements annika bacher andreas fagereng marius a. k. ring ella getz wold nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35780" target="_blank" rel="noopener">Regulating Entrepreneurship: The Case of Capital Requirements</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Annika Bacher, Andreas Fagereng, Marius A. K. Ring, Ella Getz Wold</span></li><li data-source="NBER" data-text="responses to extreme price changes: evidence from the residential demand for natural gas anna alberini levan bezhanishvili milan ščasný roberton c. williams iii nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35759" target="_blank" rel="noopener">Responses to Extreme Price Changes: Evidence from the Residential Demand for Natural Gas</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Anna Alberini, Levan Bezhanishvili, Milan Ščasný, Roberton C. Williams III</span></li><li data-source="NBER" data-text="risk premia, firm insurance, and endogenous labor income risk maarten meeuwis dimitris papanikolaou lawrence d.w. schmidt nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35781" target="_blank" rel="noopener">Risk Premia, Firm Insurance, and Endogenous Labor Income Risk</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Maarten Meeuwis, Dimitris Papanikolaou, Lawrence D.W. Schmidt</span></li><li data-source="NBER" data-text="the evolving marriage gap in children’s outcomes: family structure and young adult outcomes revisited melissa schettini kearney phillip b. levine alden q. barson nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35765" target="_blank" rel="noopener">The Evolving Marriage Gap in Children’s Outcomes: Family Structure and Young Adult Outcomes Revisited</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Melissa Schettini Kearney, Phillip B. Levine, Alden Q. Barson</span></li><li data-source="NBER" data-text="the impact of fertility on mothers’ remote work benjamin w. cowan mohamed hafis zida nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35763" target="_blank" rel="noopener">The Impact of Fertility on Mothers’ Remote Work</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Benjamin W. Cowan, Mohamed Hafis Zida</span></li><li data-source="NBER" data-text="the macroeconomic effect of stimulus checks: evidence from postwar veterans’ payments joao guerreiro jonathon hazell diego r. känzig ed manuel nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35786" target="_blank" rel="noopener">The Macroeconomic Effect of Stimulus Checks: Evidence from Postwar Veterans’ Payments</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Joao Guerreiro, Jonathon Hazell, Diego R. Känzig, Ed Manuel</span></li><li data-source="NBER" data-text="the protective effects of a healthy spouse: medicare as the family member of last resort itzik fadlon tal gross alex hoagland timothy layton nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35784" target="_blank" rel="noopener">The Protective Effects of a Healthy Spouse: Medicare as the Family Member of Last Resort</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Itzik Fadlon, Tal Gross, Alex Hoagland, Timothy Layton</span></li><li data-source="NBER" data-text="the remains of the trade: the u.s.–china trade war and its aftermath pol antràs adrian kulesza andrea f. presbitero nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35785" target="_blank" rel="noopener">The Remains of the Trade: The U.S.–China Trade War and its Aftermath</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Pol Antràs, Adrian Kulesza, Andrea F. Presbitero</span></li><li data-source="NBER" data-text="unbundling labor chris edmond simon mongey nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35783" target="_blank" rel="noopener">Unbundling Labor</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Chris Edmond, Simon Mongey</span></li><li data-source="NBER" data-text="using policy functions to estimate merger impacts: an application to jetblue-spirit gautam gowrisankaran christopher d. bruegge alex gross nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35787" target="_blank" rel="noopener">Using Policy Functions to Estimate Merger Impacts: An Application to JetBlue-Spirit</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Gautam Gowrisankaran, Christopher D. Bruegge, Alex Gross</span></li><li data-source="NBER" data-text="well-being salience in corporate disclosures and worker health riccardo di francesco peter hull seetha menon nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35760" target="_blank" rel="noopener">Well-Being Salience in Corporate Disclosures and Worker Health</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Riccardo Di Francesco, Peter Hull, Seetha Menon</span></li><li data-source="NBER" data-text="when tax shields shrink: interest deductibility limitations and corporate innovation xinru chen mara faccio stefano manfredonia jin xu nber working papers"><span class="src">NBER</span><a href="https://www.nber.org/papers/w35775" target="_blank" rel="noopener">When Tax Shields Shrink: Interest Deductibility Limitations and Corporate Innovation</a><span class="who"><span title="NBER Working Papers">NBER Working Papers</span> &middot; Xinru Chen, Mara Faccio, Stefano Manfredonia, Jin Xu</span></li><li data-source="NEP-CBE" data-text="is it a lie if i don’t know? mechanisms and mitigation of dishonesty under ignorance sven a. simon sven arne simon cesifo working paper series, cesifo"><span class="src">NEP-CBE</span><a href="https://econpapers.repec.org/RePEc:ces:ceswps:_12985?ref=nep-cbe" target="_blank" rel="noopener">Is It a Lie If I Don’t Know? Mechanisms and Mitigation of Dishonesty Under Ignorance</a><span class="who"><span title="CESifo Working Paper Series, CESifo">CESifo Working Paper Series</span> &middot; Sven A. Simon, Sven Arne Simon</span></li><li data-source="NEP-CBE" data-text="rationality, intuition, and behavioral biases in investment decisions: bridging classical finance and behavioral finance with evidence from morocco raja el asri abdelaziz messaoudi post-print, hal"><span class="src">NEP-CBE</span><a href="https://econpapers.repec.org/RePEc:hal:journl:hal-05691219?ref=nep-cbe" target="_blank" rel="noopener">Rationality, Intuition, and Behavioral Biases in Investment Decisions: Bridging Classical Finance and Behavioral Finance with Evidence from Morocco</a><span class="who"><span title="Post-Print, HAL">Post-Print</span> &middot; Raja El Asri, Abdelaziz Messaoudi</span></li><li data-source="NEP-DEM" data-text="fertility under income uncertainty: the role of education subsidies kanato nakakuni crc tr 224 discussion paper series, university of bonn and university of mannheim, germany"><span class="src">NEP-DEM</span><a href="https://econpapers.repec.org/RePEc:bon:boncrc:crctr224_2025_780?ref=nep-dem" target="_blank" rel="noopener">Fertility under Income Uncertainty: The Role of Education Subsidies</a><span class="who"><span title="CRC TR 224 Discussion Paper Series, University of Bonn and University of Mannheim, Germany">CRC TR 224 Discussion Paper Series</span> &middot; Kanato Nakakuni</span></li><li data-source="NEP-DEM" data-text="neonatal health and long-term outcomes: twin-based evidence from linked scandinavian registers evelina björkegren aline butikofer gabriella conti marten palme kjell salvanes working papers, human capital and economic opportunity working group"><span class="src">NEP-DEM</span><a href="https://econpapers.repec.org/RePEc:hka:wpaper:2026-012?ref=nep-dem" target="_blank" rel="noopener">Neonatal Health and Long-Term Outcomes: Twin-Based Evidence From Linked Scandinavian Registers</a><span class="who"><span title="Working Papers, Human Capital and Economic Opportunity Working Group">Working Papers</span> &middot; Evelina Björkegren, Aline Butikofer, Gabriella Conti, Marten Palme, Kjell Salvanes</span></li><li data-source="NEP-DEM" data-text="sources of inequality at birth: the interplay between genes and parental socioeconomic status pietro biroli nicolau martin-bassols andries marees hans van kippersluis cornelius rietveld pia arce kevin thom stephanie von hinke jeremy vollen titus galama working papers, human capital and economic opportunity working group"><span class="src">NEP-DEM</span><a href="https://econpapers.repec.org/RePEc:hka:wpaper:2026-007?ref=nep-dem" target="_blank" rel="noopener">Sources of Inequality at Birth: The Interplay Between Genes and Parental Socioeconomic Status</a><span class="who"><span title="Working Papers, Human Capital and Economic Opportunity Working Group">Working Papers</span> &middot; Pietro Biroli, Nicolau Martin-Bassols, Andries Marees, Hans van Kippersluis, Cornelius Rietveld, Pia Arce &amp; 4 more</span></li><li data-source="NEP-DEM" data-text="supporting mothers back to work: experimental evidence on employment, fertility, and child outcomes daniela del boca luca favero chiara pronzato working papers, human capital and economic opportunity working group"><span class="src">NEP-DEM</span><a href="https://econpapers.repec.org/RePEc:hka:wpaper:2026-006?ref=nep-dem" target="_blank" rel="noopener">Supporting Mothers Back to Work: Experimental Evidence on Employment, Fertility, and Child Outcomes</a><span class="who"><span title="Working Papers, Human Capital and Economic Opportunity Working Group">Working Papers</span> &middot; Daniela Del Boca, Luca Favero, Chiara Pronzato</span></li><li data-source="NEP-DEM" data-text="why do (even) immigrant women in south korea exhibit depressed fertility? investigating the fertility of commodified marriage migrants jiseon baek d. susie lee mpidr working papers, max planck institute for demographic research, rostock, germany"><span class="src">NEP-DEM</span><a href="https://econpapers.repec.org/RePEc:dem:wpaper:wp-2026-039?ref=nep-dem" target="_blank" rel="noopener">Why Do (even) immigrant women in south korea exhibit depressed fertility? Investigating the fertility of commodified marriage migrants</a><span class="who"><span title="MPIDR Working Papers, Max Planck Institute for Demographic Research, Rostock, Germany">MPIDR Working Papers</span> &middot; Jiseon Baek, D. Susie Lee</span></li><li data-source="NEP-LAB" data-text="a discrete choice approach to labor market matching joern kleinert graz economics papers, university of graz, department of economics"><span class="src">NEP-LAB</span><a href="https://econpapers.repec.org/RePEc:grz:wpaper:2026-16?ref=nep-lab" target="_blank" rel="noopener">A discrete choice approach to labor market matching</a><span class="who"><span title="Graz Economics Papers, University of Graz, Department of Economics">Graz Economics Papers</span> &middot; Joern Kleinert</span></li><li data-source="NEP-LAB" data-text="disaffection at work: employee responses to job-related information beatrice braut mariele macaluso vincenzo mollisi papers, arxiv.org"><span class="src">NEP-LAB</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.27538?ref=nep-lab" target="_blank" rel="noopener">Disaffection at Work: Employee Responses to Job-Related Information</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Beatrice Braut, Mariele Macaluso, Vincenzo Mollisi</span></li><li data-source="NEP-LAB" data-text="does part-time work affect firms&#x27; employment structure and outcomes? bergmann, lea ruhr economic papers, rwi - leibniz-institut für wirtschaftsforschung, ruhr-university bochum, tu dortmund university, university of duisburg-essen"><span class="src">NEP-LAB</span><a href="https://econpapers.repec.org/RePEc:zbw:rwirep:343040?ref=nep-lab" target="_blank" rel="noopener">Does part-time work affect firms&#x27; employment structure and outcomes?</a><span class="who"><span title="Ruhr Economic Papers, RWI - Leibniz-Institut für Wirtschaftsforschung, Ruhr-University Bochum, TU Dortmund University, University of Duisburg-Essen">Ruhr Economic Papers</span> &middot; Bergmann, Lea</span></li><li data-source="NEP-LAB" data-text="investing in mothers? the long-run impact of a universal child care program on maternal work and income michael baker jonathan gruber kevin s. milligan nep: labour economics"><span class="src">NEP-LAB</span><a href="https://econpapers.repec.org/RePEc:nbr:nberwo:35514?ref=nep-lab" target="_blank" rel="noopener">Investing in Mothers? The Long-Run Impact of a Universal Child Care Program on Maternal Work and Income</a><span class="who"><span title="NEP: Labour Economics">NEP: Labour Economics</span> &middot; Michael Baker, Jonathan Gruber, Kevin S. Milligan</span></li><li data-source="NEP-LAB" data-text="motivating job seekers cockx, bart egebark, johan van hoye, greet videnord, emilie vikström, johan roa research memorandum, maastricht university, research centre for education and the labour market (roa)"><span class="src">NEP-LAB</span><a href="https://econpapers.repec.org/RePEc:unm:umaror:2026002?ref=nep-lab" target="_blank" rel="noopener">Motivating Job Seekers</a><span class="who"><span title="ROA Research Memorandum, Maastricht University, Research Centre for Education and the Labour Market (ROA)">ROA Research Memorandum</span> &middot; Cockx, Bart, Egebark, Johan, Van Hoye, Greet, Videnord, Emilie, Vikström, Johan</span></li><li data-source="NEP-LAB" data-text="rebuilding startups: an empirical study on remote work and skill complementarity zixi lei xiaomeng chen wen wen andrew whinston papers, arxiv.org"><span class="src">NEP-LAB</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2608.02666?ref=nep-lab" target="_blank" rel="noopener">Rebuilding Startups: An Empirical Study on Remote Work and Skill Complementarity</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Zixi Lei, Xiaomeng Chen, Wen Wen, Andrew Whinston</span></li><li data-source="NEP-LAB" data-text="remote work and compensation inequality mizen, paul de fraja, gianni matheson, jesse rockey, james taneja, shivani thwaites, gregory discussion papers, economic statistics centre of excellence"><span class="src">NEP-LAB</span><a href="https://econpapers.repec.org/RePEc:eoe:escoed:escoe-dp-2025-04?ref=nep-lab" target="_blank" rel="noopener">Remote Work and Compensation Inequality</a><span class="who"><span title="Discussion Papers, Economic Statistics Centre of Excellence">Discussion Papers</span> &middot; Mizen, Paul, De Fraja, Gianni, Matheson, Jesse, Rockey, James, Taneja, Shivani, Thwaites, Gregory</span></li><li data-source="NEP-LAB" data-text="the earlier, the better? school entry and child maltreatment adam a. dzulkipli nicole black david w. johnston leonie segal papers, centre for health economics, monash university"><span class="src">NEP-LAB</span><a href="https://econpapers.repec.org/RePEc:mhe:chemon:paper_1788311805474_394?ref=nep-lab" target="_blank" rel="noopener">The Earlier, the Better? School Entry and Child Maltreatment</a><span class="who"><span title="Papers, Centre for Health Economics, Monash University">Papers</span> &middot; Adam A. Dzulkipli, Nicole Black, David W. Johnston, Leonie Segal</span></li><li data-source="NEP-MIG" data-text="framed contributor status shapes uk-resident natives&#x27; and immigrants&#x27; distributive choices and fair-share beliefs linda dezso christian koch graz economics papers, university of graz, department of economics"><span class="src">NEP-MIG</span><a href="https://econpapers.repec.org/RePEc:grz:wpaper:2026-18?ref=nep-mig" target="_blank" rel="noopener">Framed contributor status shapes UK-resident natives&#x27; and immigrants&#x27; distributive choices and fair-share beliefs</a><span class="who"><span title="Graz Economics Papers, University of Graz, Department of Economics">Graz Economics Papers</span> &middot; Linda Dezso, Christian Koch</span></li><li data-source="NEP-MIG" data-text="hkc10 - disasters, labor migration, and migrant downgrading: evidence from typhoons in the philippines murathanoglu, emir oberlin college kasper economics and business working papers series, oberlin college, department of economics"><span class="src">NEP-MIG</span><a href="https://econpapers.repec.org/RePEc:cxv:wpaper:2607?ref=nep-mig" target="_blank" rel="noopener">HKC10 - Disasters, Labor Migration, and Migrant Downgrading: Evidence from Typhoons in the Philippines</a><span class="who"><span title="Oberlin College Kasper Economics and Business Working Papers Series, Oberlin College, Department of Economics">Oberlin College Kasper Economics and Business Working Papers Series</span> &middot; Murathanoglu, Emir</span></li><li data-source="NEP-MIG" data-text="hiring refugees as apprentices: the role of skills, signals, and policy interventions christina felfe lukas kagerbauer max müller christoph sajons judith saurer thomas zwick crc tr 224 discussion paper series, university of bonn and university of mannheim, germany"><span class="src">NEP-MIG</span><a href="https://econpapers.repec.org/RePEc:bon:boncrc:crctr224_2025_778?ref=nep-mig" target="_blank" rel="noopener">Hiring Refugees as Apprentices: The Role of Skills, Signals, and Policy Interventions</a><span class="who"><span title="CRC TR 224 Discussion Paper Series, University of Bonn and University of Mannheim, Germany">CRC TR 224 Discussion Paper Series</span> &middot; Christina Felfe, Lukas Kagerbauer, Max Müller, Christoph Sajons, Judith Saurer, Thomas Zwick</span></li><li data-source="NEP-MIG" data-text="the returns to international migration in a free mobility setting: evidence from austria and germany andrea weber david card wolfgang dauth wolfgang frimmel julia schmieder rudolf winter-ebmer economics working papers, department of economics, johannes kepler university linz, austria"><span class="src">NEP-MIG</span><a href="https://econpapers.repec.org/RePEc:jku:econwp:2026-07?ref=nep-mig" target="_blank" rel="noopener">The Returns to International Migration in a Free Mobility Setting: Evidence from Austria and Germany</a><span class="who"><span title="Economics working papers, Department of Economics, Johannes Kepler University Linz, Austria">Economics working papers</span> &middot; Andrea Weber, David Card, Wolfgang Dauth, Wolfgang Frimmel, Julia Schmieder, Rudolf Winter-Ebmer</span></li><li data-source="NEP-SPO" data-text="allocation rules for network games with local considerations sylvain béal emmanuelle lebeuf kevin techer working papers, crese"><span class="src">NEP-SPO</span><a href="https://econpapers.repec.org/RePEc:crb:wpaper:2026-08?ref=nep-spo" target="_blank" rel="noopener">Allocation rules for network games with local considerations</a><span class="who"><span title="Working Papers, CRESE">Working Papers</span> &middot; Sylvain Béal, Emmanuelle Lebeuf, Kevin Techer</span></li><li data-source="NEP-SPO" data-text="an eye for an eye – the study of negative reciprocity. evidence from a game show natalia starzykowska working papers, faculty of economic sciences, university of warsaw"><span class="src">NEP-SPO</span><a href="https://econpapers.repec.org/RePEc:war:wpaper:2026-26?ref=nep-spo" target="_blank" rel="noopener">An Eye for an Eye – The Study of Negative Reciprocity. Evidence From a Game Show</a><span class="who"><span title="Working Papers, Faculty of Economic Sciences, University of Warsaw">Working Papers</span> &middot; Natalia Starzykowska</span></li><li data-source="NEP-SPO" data-text="pre-game paired-comparison modeling of professional league of legends map outcomes min-ren guan shen-ning tung papers, arxiv.org"><span class="src">NEP-SPO</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2609.08060?ref=nep-spo" target="_blank" rel="noopener">Pre-game paired-comparison modeling of professional League of Legends map outcomes</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Min-Ren Guan, Shen-Ning Tung</span></li><li data-source="NEP-SPO" data-text="tournaments with managerial discretion peiran xiao hashim zaman papers, arxiv.org"><span class="src">NEP-SPO</span><a href="https://econpapers.repec.org/RePEc:arx:papers:2609.04068?ref=nep-spo" target="_blank" rel="noopener">Tournaments with Managerial Discretion</a><span class="who"><span title="Papers, arXiv.org">Papers</span> &middot; Peiran Xiao, Hashim Zaman</span></li><li data-source="NEP-SPO" data-text="what does attitude towards risk tell us about the adoption of good health behaviours? results from a telephone survey christine sevilla-dedieu morgane le guern nathalie billaudeau alain paraponaris post-print, hal"><span class="src">NEP-SPO</span><a href="https://econpapers.repec.org/RePEc:hal:journl:hal-05746334?ref=nep-spo" target="_blank" rel="noopener">What does attitude towards risk tell us about the adoption of good health behaviours? Results from a telephone survey</a><span class="who"><span title="Post-Print, HAL">Post-Print</span> &middot; Christine Sevilla-Dedieu, Morgane Le Guern, Nathalie Billaudeau, Alain Paraponaris</span></li><li data-source="QJE" data-text="bringing work home: flexible work arrangements as gateway jobs for women in west bengal lisa ho suhani jalota anahita karandikar quarterly journal of economics"><span class="src">QJE</span><a href="https://doi.org/10.1093/qje/qjag045" target="_blank" rel="noopener">Bringing Work Home: Flexible Work Arrangements as Gateway Jobs for Women in West Bengal</a><span class="who"><span title="Quarterly Journal of Economics">Quarterly Journal of Economics</span> &middot; Lisa Ho, Suhani Jalota, Anahita Karandikar</span></li><li data-source="ReStat" data-text="a comment on “raising health awareness in rural communities: a randomized experiment in bangladesh and india” by siddique et al. (2024) anders kjelsrud andreas kotsadam ole rogeberg abel brodeur review of economics and statistics"><span class="src">ReStat</span><a href="https://doi.org/10.1162/rest.x.1823" target="_blank" rel="noopener">A Comment on “Raising Health Awareness in Rural Communities: A Randomized Experiment in Bangladesh and India” by Siddique et al. (2024)</a><span class="who"><span title="Review of Economics and Statistics">Review of Economics and Statistics</span> &middot; Anders Kjelsrud, Andreas Kotsadam, Ole Rogeberg, Abel Brodeur</span></li><li data-source="ReStat" data-text="author requests for removal from “raising health awareness in rural communities: a randomized experiment in bangladesh and india” (siddique et al., 2024) abu siddique tabassum rahman review of economics and statistics"><span class="src">ReStat</span><a href="https://doi.org/10.1162/rest.x.1827" target="_blank" rel="noopener">Author Requests for Removal from “Raising Health Awareness in Rural Communities: A Randomized Experiment in Bangladesh and India” (Siddique et al., 2024)</a><span class="who"><span title="Review of Economics and Statistics">Review of Economics and Statistics</span> &middot; Abu Siddique, Tabassum Rahman</span></li><li data-source="ReStat" data-text="response to the comment on “raising health awareness in rural communities: a randomized experiment in bangladesh and india” (siddique et al., 2024) firoz ahmed asad islam debayan pakrashi review of economics and statistics"><span class="src">ReStat</span><a href="https://doi.org/10.1162/rest.x.1825" target="_blank" rel="noopener">Response to the Comment on “Raising Health Awareness in Rural Communities: A Randomized Experiment in Bangladesh and India” (Siddique et al., 2024)</a><span class="who"><span title="Review of Economics and Statistics">Review of Economics and Statistics</span> &middot; Firoz Ahmed, Asad Islam, Debayan Pakrashi</span></li><li data-source="ReStud" data-text="revisiting retirement and social security claiming decisions neha bairoliya kathleen mckiernan review of economic studies"><span class="src">ReStud</span><a href="https://doi.org/10.1093/restud/rdag107" target="_blank" rel="noopener">Revisiting Retirement and Social Security Claiming Decisions</a><span class="who"><span title="Review of Economic Studies">Review of Economic Studies</span> &middot; Neha Bairoliya, Kathleen McKiernan</span></li><li data-source="arXiv econ.EM" data-text="a stochastic nested fixed point algorithm for large-scale blp estimation zhentong lu myung hwan seo youngki shin qichen zhang arxiv econometrics"><span class="src">arXiv econ.EM</span><a href="http://arxiv.org/abs/2609.23998v1" target="_blank" rel="noopener">A Stochastic Nested Fixed Point Algorithm for Large-Scale BLP Estimation</a><span class="who"><span title="arXiv Econometrics">arXiv Econometrics</span> &middot; Zhentong Lu, Myung Hwan Seo, Youngki Shin, Qichen Zhang</span></li><li data-source="arXiv econ.EM" data-text="consistent order selection under non-identifiability and dependence eduardo fonseca mendes arxiv econometrics"><span class="src">arXiv econ.EM</span><a href="http://arxiv.org/abs/2609.23220v1" target="_blank" rel="noopener">Consistent Order Selection under Non-Identifiability and Dependence</a><span class="who"><span title="arXiv Econometrics">arXiv Econometrics</span> &middot; Eduardo Fonseca Mendes</span></li><li data-source="arXiv econ.EM" data-text="stealing profits: spread-based temporal hierarchy forecasting for day-ahead electricity markets arkadiusz lipiecki nikolaos kourentzes rafal weron arxiv econometrics"><span class="src">arXiv econ.EM</span><a href="http://arxiv.org/abs/2609.23223v1" target="_blank" rel="noopener">Stealing profits: Spread-based temporal hierarchy forecasting for day-ahead electricity markets</a><span class="who"><span title="arXiv Econometrics">arXiv Econometrics</span> &middot; Arkadiusz Lipiecki, Nikolaos Kourentzes, Rafal Weron</span></li><li data-source="arXiv econ.GN" data-text="biased agents, extreme beliefs: motivated reasoning under competing models zhongheng qiao arxiv general economics"><span class="src">arXiv econ.GN</span><a href="http://arxiv.org/abs/2609.22446v1" target="_blank" rel="noopener">Biased Agents, Extreme Beliefs: Motivated Reasoning Under Competing Models</a><span class="who"><span title="arXiv General Economics">arXiv General Economics</span> &middot; Zhongheng Qiao</span></li><li data-source="arXiv econ.GN" data-text="firm valuation when ai shapes the business model: a milestone-based real-options framework for the ai valuation uncertainty problem walter kurz wojtek stricker stefan marx frank reinhardt florian kollberg arxiv general economics"><span class="src">arXiv econ.GN</span><a href="http://arxiv.org/abs/2609.24181v1" target="_blank" rel="noopener">Firm Valuation When AI Shapes the Business Model: A Milestone-Based Real-Options Framework for the AI Valuation Uncertainty Problem</a><span class="who"><span title="arXiv General Economics">arXiv General Economics</span> &middot; Walter Kurz, Wojtek Stricker, Stefan Marx, Frank Reinhardt, Florian Kollberg</span></li><li data-source="arXiv econ.GN" data-text="pareto-improving pricing: why 3 is better than 2 zi yang kang piotr dworczak arxiv general economics"><span class="src">arXiv econ.GN</span><a href="http://arxiv.org/abs/2609.22652v1" target="_blank" rel="noopener">Pareto-Improving Pricing: Why 3 Is Better Than 2</a><span class="who"><span title="arXiv General Economics">arXiv General Economics</span> &middot; Zi Yang Kang, Piotr Dworczak</span></li><li data-source="arXiv econ.GN" data-text="people escalate against a competitor labelled human and hold back against one labelled an optimising machine vinicius ferraz leon houf arxiv general economics"><span class="src">arXiv econ.GN</span><a href="http://arxiv.org/abs/2609.21439v1" target="_blank" rel="noopener">People escalate against a competitor labelled human and hold back against one labelled an optimising machine</a><span class="who"><span title="arXiv General Economics">arXiv General Economics</span> &middot; Vinicius Ferraz, Leon Houf</span></li><li data-source="arXiv econ.GN" data-text="social influence and the allocation of scientific attention in ai populations maxim chupilkin arxiv general economics"><span class="src">arXiv econ.GN</span><a href="http://arxiv.org/abs/2609.22408v1" target="_blank" rel="noopener">Social Influence and the Allocation of Scientific Attention in AI Populations</a><span class="who"><span title="arXiv General Economics">arXiv General Economics</span> &middot; Maxim Chupilkin</span></li><li data-source="arXiv econ.GN" data-text="structural versus allocative inefficiency across organizational settings jan van de poll arxiv general economics"><span class="src">arXiv econ.GN</span><a href="http://arxiv.org/abs/2609.23744v1" target="_blank" rel="noopener">Structural versus Allocative Inefficiency Across Organizational Settings</a><span class="who"><span title="arXiv General Economics">arXiv General Economics</span> &middot; Jan van de Poll</span></li></ul><p class="nomatch" style="display:none">Nothing matches that filter.</p></details>
+<footer>
+<h4>Sources that failed this run</h4><ul>
+<li><strong>SSRN Economic History Network eJournal</strong> &mdash; EGRESS_BLOCKED: www.ssrn.com not on network allowlist (WebFetch)</li>
+<li><strong>SSRN Political Economy Network eJournal</strong> &mdash; EGRESS_BLOCKED: www.ssrn.com not on network allowlist (WebFetch)</li>
+</ul>
+<p class="ok">Generated by the paper-briefing routine. Items are shown once, ever &mdash; anything already reported on a previous morning is filtered out.</p>
+</footer></div>
+
+<script>
+(function(){
+  var root = document.getElementById('browse');
+  if (!root) return;
+  var box   = root.querySelector('input');
+  var chips = Array.prototype.slice.call(root.querySelectorAll('.chip'));
+  var rows  = Array.prototype.slice.call(root.querySelectorAll('ul.rows li'));
+  var none  = root.querySelector('.nomatch');
+  var active = null;
+
+  function refresh(){
+    var q = (box.value || '').trim().toLowerCase();
+    var shown = 0;
+    rows.forEach(function(li){
+      var okSrc = !active || li.getAttribute('data-source') === active;
+      var okTxt = !q || li.getAttribute('data-text').indexOf(q) !== -1;
+      var show = okSrc && okTxt;
+      li.style.display = show ? '' : 'none';
+      if (show) shown++;
+    });
+    none.style.display = shown ? 'none' : '';
+  }
+
+  box.addEventListener('input', refresh);
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      var v = c.getAttribute('data-source');
+      active = (active === v) ? null : v;
+      chips.forEach(function(o){
+        o.setAttribute('aria-pressed', o.getAttribute('data-source') === active);
+      });
+      refresh();
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
